@@ -1,0 +1,729 @@
+<template>
+  <div class="container">
+    <div class="title_box">
+      <img src="@/assets/images/title_icon.png" alt="" />
+      <div class="left_title">公职人员入口质量关应用场景</div>
+      <div class="en_desc">Federation of trade union member data monitoring screen</div>
+    </div>
+    <div class="right_title">{{time}}</div>
+    <div class="box">
+      <div class="left_box" v-if="!showEchartsStatsu"></div>
+      <div class="left_echarts_box" v-else>
+        <div class="title">
+          <img src="@/assets/images/icon4.png" alt="">
+          <div class="box_title">审计局</div>
+          <i class="el-icon-arrow-down"></i>
+        </div>
+        <img class="bg_img" src="@/assets/images/cn.png" alt="">
+        <div class="box_title">部门介绍</div>
+        <p class="desc">1.公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员……</p>
+        <div class="box_title">科室职能</div>
+        <p class="desc_line">进一步职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员……</p>
+        <div class="title_box">
+          <div class="box_title">紧缺专业</div>
+          <div class="title re_title">
+            <img src="@/assets/images/icon4.png" alt="">
+            <div class="box_title">经济法学</div>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <th>科室</th>
+            <th>专业名称</th>
+            <th>人才缺口</th>
+          </tr>
+          <tr>
+            <td>侦察科</td>
+            <td>经济法学</td>
+            <td class="value">20</td>
+          </tr>
+          <tr>
+            <td>侦察科</td>
+            <td>经济法学</td>
+            <td class="value">20</td>
+          </tr>
+          <tr>
+            <td>侦察科</td>
+            <td>经济法学</td>
+            <td class="value">20</td>
+          </tr>
+          <tr>
+            <td>侦察科</td>
+            <td>经济法学</td>
+            <td class="value">20</td>
+          </tr>
+        </table>
+      </div>
+      <div class="con_box">
+        <div class="title">公职人员部门分析数据</div>
+        <div class="nav_svg_box">
+          <div class="nav_svg" >
+            <dv-decoration-5 style="width:400px;height:40px;" />
+          </div>
+        </div>
+        <div class="select_box" @click="handleShowEcharts">
+          <div class="select_con_box" @click="handleSelect(0)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData1[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(1)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData2[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(2)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData3[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(3)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData4[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(4)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData5[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(5)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData6[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(6)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData7[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(7)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData8[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <div class="select_con_box" @click="handleSelect(8)">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{listData9[0]}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <!-- <div class="select_con_box" v-for="item in list" :key="index">
+            <img src="@/assets/images/icon1.png" alt="">
+            <p>{{item}}</p>
+            <i class="el-icon-arrow-down"></i>
+          </div> -->
+        </div>
+        <div class="con_con_box" v-if="!showEchartsStatsu">
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData1" :style="enterIndex1==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter1(index)" @mouseleave="handleLeave1(index)">
+              <img v-if="enterIndex1==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData2" :style="enterIndex2==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter2(index)" @mouseleave="handleLeave2(index)">
+              <img v-if="enterIndex2==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData3" :style="enterIndex3==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter3(index)" @mouseleave="handleLeave3(index)">
+              <img v-if="enterIndex3==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData4" :style="enterIndex4==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter4(index)" @mouseleave="handleLeave4(index)">
+              <img v-if="enterIndex4==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData5" :style="enterIndex5==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter5(index)" @mouseleave="handleLeave5(index)">
+              <img v-if="enterIndex5==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData6" :style="enterIndex6==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter6(index)" @mouseleave="handleLeave6(index)">
+              <img v-if="enterIndex6==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData7" :style="enterIndex7==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter7(index)" @mouseleave="handleLeave7(index)">
+              <img v-if="enterIndex7==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData8" :style="enterIndex8==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter8(index)" @mouseleave="handleLeave8(index)">
+              <img v-if="enterIndex8==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+          <div class="select_item_zbox">
+            <div class="select_item_box" v-for="item,index in listData9" :style="enterIndex9==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter9(index)" @mouseleave="handleLeave9(index)">
+              <img v-if="enterIndex9==index" src="@/assets/images/icon2.png" alt="">
+              <img v-else src="@/assets/images/icon3.png" alt="">
+              <p>{{item}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="con_echarts_box" v-else>
+          <div class="con_top">
+            <div class="box_title">部门人员总览</div>
+            <div class="con_charts_box">
+              <div class="con_charts">
+              <div class="box_title_min">人员类别</div>
+              <echartsPie :data="pieData1"></echartsPie>
+            </div>
+            <div class="con_charts">
+              <div class="box_title_min">年龄分布</div>
+              <echartsPie :data="pieData2"></echartsPie>
+            </div>
+            <div class="con_charts">
+              <div class="box_title_min">学位学历</div>
+              <echartsPie :data="pieData3"></echartsPie>
+            </div>
+            <div class="con_charts">
+              <div class="box_title_min">专业情况</div>
+              <echartsPie :data="pieData4"></echartsPie>
+            </div>
+            </div>
+          </div>
+          <div class="con_bottom">
+            <div class="left">
+              <div class="box_title">近三年招录情况</div>
+              <div class="en_desc">County/District Labor Union statistics</div>
+              <echartsLine :data="lineData1"></echartsLine>
+              <echartsLine :data="lineData2"></echartsLine>
+              <echartsLine :data="lineData3"></echartsLine>
+              <echartsLine :data="lineData4"></echartsLine>
+            </div>
+            <div class="con">
+              <img src="@/assets/images/eye.png" alt=""/>
+              <p>科室业务专业对比</p>
+              <img src="@/assets/images/eye.png" alt=""/>
+            </div>
+            <div class="right">
+                <div class="right_chart_title">年轻干部分析</div>
+                <div class="right_chart_box">
+                  <p>紧急专业</p>
+                  <div class="right_chart">
+                    <echartsCroBar :chartData="chartData1"></echartsCroBar>
+                  </div>
+                </div>
+                <div class="right_chart_box">
+                  <p>当前现状</p>
+                  <div class="right_chart">
+                    <echartsCroBar :chartData="chartData2"></echartsCroBar>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right_box" v-if="!showEchartsStatsu"></div>
+      <div class="right_echarts_box" v-else>
+        <div class="top">
+          <div class="box_title">预警信息</div>
+          <div class="en_desc">Trade Union statistics of market value industry</div>
+          <div class="text_box">
+            <img src="@/assets/images/z_icon.png" alt="">
+            <p class="active">科协连续5年未招录行政事业人员</p>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="box_title">招录联审建议</div>
+          <div class="en_desc">Trade Union statistics of market value industry</div>
+          <div class="text_box">
+            <img src="@/assets/images/z_icon.png" alt="">
+            <p>科协连续5年未招录行政事业人员</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import echartsPie from '@/components/echartsPie.vue'
+import echartsLine from '@/components/echartsLine.vue'
+import echartsCroBar from '@/components/echartsCroBar.vue'
+export default {
+  components: {echartsPie,echartsLine,echartsCroBar},
+  data () {
+    return {
+      time:'',
+      // list:[listData1[0], listData2[0], listData3[0],listData4[0], listData5[0], listData6[0],listData7[0], listData8[0], listData9[0]],
+      listData1:['党委机构','人大机构','政府机构','双协机构','法院','检察院','事业单位','国有企业','街道乡镇'],
+      listData2:['人大机构','党委机构','政府机构'],
+      listData3:['政府机构','人大机构','党委机构','双协机构','法院','检察院','事业单位','国有企业','街道乡镇'],
+      listData4:['法院','人大机构','政府机构'],
+      listData5:['检察院'],
+      listData6:['事业单位'],
+      listData7:['双协机构','人大机构','政府机构','党委机构','法院','检察院','事业单位','国有企业','街道乡镇'],
+      listData8:['国有企业','人大机构','政府机构','双协机构','法院','检察院','事业单位'],
+      listData9:['街道乡镇','人大机构','政府机构','双协机构','法院','检察院','事业单位','国有企业','党委机构'],
+      enterIndex1:0,
+      enterIndex2:0,
+      enterIndex3:0,
+      enterIndex4:0,
+      enterIndex5:0,
+      enterIndex6:0,
+      enterIndex7:0,
+      enterIndex8:0,
+      enterIndex9:0,
+      leaveIndex1:'',
+      leaveIndex2:'',
+      leaveIndex3:'',
+      leaveIndex4:'',
+      leaveIndex5:'',
+      leaveIndex6:'',
+      leaveIndex7:'',
+      leaveIndex8:'',
+      leaveIndex9:'',
+      selectStyle:{
+        background: '#404040',
+        color:'#0b72fb'
+      },
+      showEchartsStatsu:false,
+      pieData1:{
+        color:['#7fcbf4','#5385f4'],
+        data: [
+            { value: 45, name: '45%' },
+            { value: 55, name: '55%' }
+          ],
+      },
+      pieData2:{
+        color:['#2fa9a4','#2cb1e4','#246ddb'],
+        data: [
+            { value: 32, name: '32%' },
+            { value: 41, name: '41%' },
+            { value: 27, name: '27%' }
+          ],
+      },
+      pieData3:{
+        color:['#32e0f5','#468cf5'],
+        data: [
+            { value: 49, name: '49%' },
+            { value: 51, name: '51%' }
+          ],
+      },
+      pieData4:{
+        color:['#3181f4','#2cb1e3','#aac8f4'],
+        data: [
+            { value: 73, name: '73%' },
+            { value: 23, name: '23%' },
+            { value: 4, name: '4%' }
+          ],
+      },
+      lineData1:{
+        name:'双一流',
+        data:["1", "8", "1"],
+        bg:'#21fff2'
+      },
+      lineData2:{
+        name:'研究生',
+        data:["3", "6", "10"],
+        bg:'#1da2e6'
+      },
+      lineData3:{
+        name:'本科',
+        data:["57", "82", "50"],
+        bg:'#22e6ff'
+      },
+      lineData4:{
+        name:'大专及以下',
+        data:["13", "11", "3"],
+        bg:'#1852dc'
+      },
+      chartData1:{
+        left:'30%',
+        barColor:'#1593c1',
+        barWidth:15,
+        itemName:'紧急专业招录人数',
+        nameData:[
+                  '法学',
+                  '计算机科学与技术',
+                  '数据科技与大数据技术'
+                ],
+        valueData:[1, 1, 1]
+      },
+      chartData2:{
+        left:'30%',
+        barColor:'#0d81d9',
+        barWidth:15,
+        itemName:'当前人数',
+        nameData:[
+                  '工学',
+                  '经济学',
+                  '管理学'
+                ],
+        valueData:[1, 3, 8]
+      },
+    }
+  },
+  created () {
+    // 获取当前时间
+    this.handleTime();
+  },
+  mounted () {
+
+  },
+  methods: {
+    // 是否显示图表
+    handleShowEcharts(){
+      this.showEchartsStatsu=false
+    },
+    handleSelect(index){
+      console.log(index)
+    },
+    handleEnter1(index){
+      this.enterIndex1=index
+    },
+    handleEnter2(index){
+      this.enterIndex2=index
+    },
+    handleEnter3(index){
+      this.enterIndex3=index
+    },
+    handleEnter4(index){
+      this.enterIndex4=index
+    },
+    handleEnter5(index){
+      this.enterIndex5=index
+    },
+    handleEnter6(index){
+      this.enterIndex6=index
+    },
+    handleEnter7(index){
+      this.enterIndex7=index
+    },
+    handleEnter8(index){
+      this.enterIndex8=index
+    },
+    handleEnter9(index){
+      this.enterIndex9=index
+    },
+    handleLeave1(index){
+      this.leaveIndex1=index
+      this.enterIndex1=0
+    },
+    handleLeave2(index){
+      this.leaveIndex2=index
+      this.enterIndex2=0
+    },
+    handleLeave3(index){
+      this.leaveIndex3=index
+      this.enterIndex3=0
+    },
+    handleLeave4(index){
+      this.leaveIndex4=index
+      this.enterIndex4=0
+    },
+    handleLeave5(index){
+      this.leaveIndex5=index
+      this.enterIndex5=0
+    },
+    handleLeave6(index){
+      this.leaveIndex6=index
+      this.enterIndex6=0
+    },
+    handleLeave7(index){
+      this.leaveIndex7=index
+      this.enterIndex7=0
+    },
+    handleLeave8(index){
+      this.leaveIndex8=index
+      this.enterIndex8=0
+    },
+    handleLeave9(index){
+      this.leaveIndex9=index
+      this.enterIndex9=0
+    },
+    handleSelected(item){
+      console.log(item)
+      this.showEchartsStatsu=true
+    }
+  }
+}
+</script>
+<style scoped lang='scss'>
+@import url(@/common/index.scss);
+.left_box{
+  border:1px solid #0b4989 !important;
+  background: #101b2c;
+}
+.left_echarts_box{
+  border:1px solid #0b4989 !important;
+  background: #101b2c;
+  width: 220px;
+  height: 90%;
+  margin:20px 0 0 20px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 10px 5px;
+  .title{
+    display:flex;
+    align-items: center;
+    height: 25px;
+    border:1px solid #0a68e5;
+    position: relative;
+    img{
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      left: 10px;
+      top: 5px;
+    }
+    .box_title{
+      position: absolute;
+      left: 30px;
+    }
+    i{
+      position: absolute;
+      right: 10px;
+    }
+  }
+  .bg_img{
+    width: 150px;
+    margin: 10px 0 10px 30px;
+  }
+  .box_title{
+    margin: 10px;
+  }
+  .desc{
+    text-indent: 2em;
+    font-size: 13px;
+  }
+  .desc_line{
+    text-indent: 2em;
+    font-size: 13px;
+    line-height: 200%;
+  }
+  .title_box{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    .box_title{
+      margin: 0;
+    }
+    .re_title{
+      margin-left: 5px;
+    width: 120px;
+    height: 20px;
+    .box_title{
+      font-size: 13px;
+    }
+  }
+  }
+  table{
+    margin-top: 10px;
+    width: 100%;
+    height: 130px;
+    text-align: center;
+    th{
+      padding:3px 5px;
+      background: #142742;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    td{
+      font-size: 13px;
+    }
+    .value{
+      color:#fcc63c;
+      font-weight: 700;
+    }
+  }
+}
+.con_box{
+  .select_box{
+    position:relative;
+    top: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .select_box .select_con_box{
+    width: 100px;
+    background: #1d3453;
+  }
+  .con_con_box .select_item_box,.select_box .select_con_box{
+    margin-right: 3px;
+      display: flex;
+      align-content: center;
+      vertical-align: middle;
+      height: 30px;
+      position: relative;
+      img{
+        position: absolute;
+        left: 5px;
+        top: 3px;
+      }
+      p{
+        position: absolute;
+        font-size: 12px;
+        left: 30px;
+        top: 7px;
+      }
+      i{
+        position: absolute;
+        right: 5px;
+        top: 8px;
+      }
+  }
+  .con_con_box{
+    display: flex;
+    border:1px solid #0b4989 !important;
+    position: relative;
+    top: 20px;
+    width: 100%;
+    height: 80%;
+    background: #0b162d;
+    border-radius: 10px;
+    .select_item_zbox{
+      width: 95px;
+      margin-right: 8px;
+    }
+  }
+  .con_con_box .select_item_box{
+    width: 95px;
+    background: #202020;
+    color:#a2e3f2;
+    border-left:1px solid #0b4989;
+    border-right:1px solid #0b4989;
+  }
+}
+.con_echarts_box{
+  width: 920px;
+  height: 80%;
+  position: relative;
+  top: 20px;
+  background: #101826;
+  border:1px solid #053160;
+  border-radius:10px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  .con_top{
+    width: 98%;
+    height: 150px;
+    border:1px solid #053160;
+    border-radius:10px;
+    .con_charts_box{
+      display: flex;
+      align-items: center;
+    }
+    .box_title{
+      margin:5px 0 5px 5px;
+      font-size: 16px;
+    }
+    .con_charts{
+      text-align: center;
+      width: 20%;
+      height: 115px;
+      margin:0 2%;
+      .box_title_min{
+        font-size: 16px;
+      }
+    }
+  }
+  .con_bottom{
+    width: 100%;
+    height: 370px;
+    display:flex;
+    align-items: center;
+    .left{
+      box-sizing: border-box;
+      padding:5px 10px;
+      width: 45%;
+      height: 100%;
+      border:1px solid #053160;
+    }
+    .con{
+      box-sizing: border-box;
+      padding:5px 10px;
+      width: 8%;
+      height:100%;
+      z-index:999;
+      p{
+        font-size: 20px;
+        width: 20px;
+        margin-left: 10px;
+      }
+      img{
+        width: 50px;
+      }
+    }
+    .right{
+      width: 45%;
+      height: 95%;
+      border:1px solid #053160;
+      .right_chart_title{
+        width: 45%;
+        margin-left: 150px;
+        font-weight: 700;
+        line-height: 30px;
+        font-size: 18px;
+      }
+      .right_chart_box{
+        width: 70%;
+        height: 140px;
+        margin-top: 20px;
+        box-sizing: border-box;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+.right_box{
+  border:1px solid #0b4989 !important;
+  background: #0a0e17;
+}
+.right_echarts_box{
+  border:1px solid #0b4989 !important;
+  background: #0a0e17;
+  border-radius: 15px;
+  width: 250px;
+  height: 90%;
+  margin:20px 0 0 0;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  .text_box{
+    display: flex;
+    margin:10px 0 5px 0;
+    img{
+      width: 15px;
+      height: 15px;
+    }
+    p{
+      font-size: 10px;
+      color:#63b5f2;
+      font-weight: 700;
+      // margin-left: 3px;
+    }
+    .active{
+      color: #d84346;
+    }
+  }
+  .top{
+    width: 100%;
+    height: 220px;
+  }
+  .bottom{
+    width: 100%;
+    height: 450px;
+  }
+}
+</style>
