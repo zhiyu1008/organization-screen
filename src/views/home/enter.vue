@@ -43,12 +43,14 @@
         </div>
         <div class="third_floor">
           <div class="box_title">公职人员招录分布</div>
+          <p class="en_desc">Courty/District Labor Union statistics</p>
           <div class="chart">
             <echartsCroBar :chartData="chartData1"></echartsCroBar>
           </div>
         </div>
         <div class="fourth_floor">
           <div class="box_title">公职人员进入方式</div>
+          <p class="en_desc">Trade Union statistics of market value industry</p>
           <div class="chart" ref="leftFourthChart"></div>
         </div>
       </div>
@@ -66,22 +68,22 @@
           </div>
           <img src="@/assets/images/right.png" alt="">
           <div class="con">
-            <div class="con_li">
+            <div class="con_li" @click="handleTap(1)">
               <span>公务员</span><span class="num num_1">235</span>
             </div>
-            <div class="con_li">
+            <div class="con_li" @click="handleTap(2)">
               <span>事业人员</span><span class="num num_2">513</span>
             </div>
-            <div class="con_li">
+            <div class="con_li" @click="handleTap(3)">
               <span>国企人员</span><span class="num num_3">55</span>
             </div>
-            <div class="con_li">
+            <div class="con_li" @click="handleTap(4)">
               <span>专职社工</span><span class="num num_4">51</span>
             </div>
           </div>
           <img src="@/assets/images/right.png" alt="">
           <div class="right">
-            <echarts-pie :data="pieData"></echarts-pie>
+            <echarts-pie :data="pieData" @change="change"></echarts-pie>
           </div>
         </div>
         <div class="con_con">
@@ -118,43 +120,68 @@
             <div class="bot">
               <div class="box_title">专业目录分析</div>
               <div class="chart">
-                <table>
-                  <tr>
-                    <th>ID</th>
-                    <th>专业名称</th>
-                    <th>在职人数</th>
-                    <th>招录人数</th>
-                    <th>剩余缺口</th>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>电气工业</td>
-                    <td>62</td>
-                    <td>28</td>
-                    <td style="color:red">10</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>电气工业</td>
-                    <td>62</td>
-                    <td>28</td>
-                    <td style="color:red">10</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>电气工业</td>
-                    <td>62</td>
-                    <td>28</td>
-                    <td style="color:red">10</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>电气工业</td>
-                    <td>62</td>
-                    <td>28</td>
-                    <td style="color:red">10</td>
-                  </tr>
-                </table>
+                <div>
+                  <div class="zbox_title">
+                    <p>ID</p>
+                    <p>专业名称</p>
+                    <p>在职人数</p>
+                    <p>招录人数</p>
+                    <p>剩余缺口</p>
+                  </div>
+                  <div class="animate_box">
+                    <div class="animate">
+                    <div class="zbox">
+                    <p>1</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  <div class="zbox">
+                    <p>2</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  <div class="zbox">
+                    <p>3</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  <div class="zbox">
+                    <p>4</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  <div class="zbox">
+                    <p>5</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  <div class="zbox">
+                    <p>6</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  <div class="zbox">
+                    <p>7</p>
+                    <p>电气工业</p>
+                    <p>62</p>
+                    <p>28</p>
+                    <p style="color:#b9595d">10</p>
+                  </div>
+                  </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -163,6 +190,7 @@
       <div class="right_box">
         <div class="first_floor">
           <div class="box_title">录用平均年龄趋势</div>
+          <div class="en_desc">Trade Union statistics of market value industry</div>
           <div class="chart" ref="setRightFirst"></div>
         </div>
         <div class="second_floor">
@@ -172,7 +200,10 @@
           </div>
         </div>
         <div class="third_floor">
-          <div class="big_title">学位目标</div>
+          <div class="third_floor_box">
+              <img src="@/assets/images/icon4.png" alt="" />
+              <p>学位目标</p>
+          </div>
           <div class="chart">
             <echartsBar :data="barData"></echartsBar>
           </div>
@@ -403,6 +434,59 @@ export default {
     this.setRightFirstChart()
   },
   methods: {
+    change(val){
+      console.log('00')
+      console.log(val)
+    },
+    // 切换不同职员数据
+    handleTap(type){
+      switch(type){
+        case 1:
+        this.pieData={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+          data: [
+              { value: 10, name: '10%' },
+              { value: 20, name: '20%' },
+              { value: 30, name: '30%' },
+              { value: 40, name: '40%' }
+            ]
+        }
+        break;
+        case 2:
+        this.pieData={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+          data: [
+              { value: 25, name: '25%' },
+              { value: 25, name: '25%' },
+              { value: 25, name: '25%' },
+              { value: 25, name: '25%' }
+            ]
+        }
+        break;
+        case 3:
+        this.pieData={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+          data: [
+              { value: 10, name: '10%' },
+              { value: 30, name: '30%' },
+              { value: 25, name: '25%' },
+              { value: 35, name: '35%' }
+            ],
+        }
+        break;
+        case 4:
+        this.pieData={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+          data: [
+              { value: 26, name: '26%' },
+              { value: 19, name: '19%' },
+              { value: 24, name: '24%' },
+              { value: 31, name: '31%' }
+            ],
+        }
+        break;
+      }
+    },
     setLeftFourthChart(){
       const chart = this.$refs.leftFourthChart
       const myChart = this.$echarts.init(chart)
@@ -582,16 +666,16 @@ export default {
 @import url(@/common/index.scss);
 .left_box{
   .first_floor>.chart,.second_floor>.chart{
-    border:1px solid #3f96a5;
+    border:1px solid #0b4989;
     border-radius:10px;
     width: 200px;
-    height: 100px;
+    height: 80px;
     position: relative;
     margin: 10px 0;
     padding: 10px;
     .datalist{
       position: absolute;
-      top: 70px;
+      top: 50px;
       left: 10px;
       display: flex;
       width: 100px;
@@ -604,7 +688,7 @@ export default {
     }
     .value{
       position: absolute;
-      top: 98px;
+      top: 75px;
       left: 20px;
       display: flex;
       align-items: center;
@@ -622,6 +706,10 @@ export default {
     width: 200px;
     height: 150px;
   }
+  .fourth_floor>.chart{
+    position: relative;
+    top: -20px;
+  }
 }
 .con_box{
   .con_nav{
@@ -629,7 +717,7 @@ export default {
     width: 98%;
     margin-left: 1%;
     height: 120px;
-    border:1px solid #3f96a5;
+    border:1px solid #0b4989;
     border-radius: 10px;
     background: #010919;
     display: flex;
@@ -648,7 +736,7 @@ export default {
       }
       padding: 5px 10px;
       border-radius: 10px;
-      border:1px solid #3f96a5;
+      border:1px solid #0b4989;
     }
     .con{
       width: 280px;
@@ -656,8 +744,12 @@ export default {
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+      .con_li:hover{
+        background: #11285f;
+      }
       .con_li{
-        background: #172f64;
+        cursor:pointer;/*鼠标变小手*/
+        background: #081138;
         border-radius: 10px;
         width: 120px;
         padding: 5px;
@@ -699,7 +791,7 @@ export default {
     margin-left: 1%;
     margin-top: 10px;
     height: 420px;
-    border:1px solid #3f96a5;
+    border:1px solid #0b4989;
     border-radius: 10px;
     background: #010919;
     padding: 10px;
@@ -730,16 +822,41 @@ export default {
       margin: 10px 0 0 20px;
       width: 350px;
       height: 180px;
-      table{
-        width: 100%;
-        text-align: center;
-        th{
+      font-size: 13px;
+      overflow: hidden;
+      .zbox_title{
+        display: flex;
           background: #162a54;
           border:1px solid #172f64;
+          font-weight: 700;
+          p{
+          width: 80px;
+          text-align: center;
+          line-height: 35px;
         }
-        tr{
-          line-height: 30px;
         }
+        .animate_box{
+          overflow:hidden;
+        }
+        .animate{
+          animation: move 9s linear infinite;
+          overflow:auto;
+        }
+        .animate:hover{
+          animation-play-state: paused;
+        }
+        .zbox:hover{
+          background: #162a54;
+          color:#cfc;
+        }
+      .zbox{
+        display: flex;
+        p{
+          width: 80px;
+          text-align: center;
+          line-height: 35px;
+        }
+
       }
     }
   }
@@ -758,6 +875,26 @@ export default {
   }
   .third_floor .chart{
     height: 180px;
+  }
+  .third_floor_box{
+    font-size: 18px;
+          font-weight: 700;
+          background: #01154b;
+          display:flex;
+          position: relative;
+          cursor:pointer;/*鼠标变小手*/
+          img{
+            width: 15px;
+            margin: 5px 5px 5px 10px;
+          }
+          p{
+            margin-top: 5px;
+          }
+          i{
+            position:absolute;
+            right: 10px;
+            top: 10px;
+          }
   }
   .big_title{
       font-size: 18px;

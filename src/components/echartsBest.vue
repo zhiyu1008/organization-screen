@@ -28,7 +28,7 @@
         // 设置图表的位置
         grid: {
           x: 0, // 左间距
-          y: 0, // 上间距
+          y: -25, // 上间距
           x2: 80, // 右间距
           y2: 0, // 下间距
         },
@@ -38,7 +38,7 @@
             fontSize: 12,
             color: '#cdd3ee'
           },
-          top: 13,
+          top: 0,
           left:10,
           data: this.chartData.value // 图例的数据数组
         },
@@ -107,6 +107,6 @@
   <style scoped lang='scss'>
   .chart{
     // width: 200px;
-    height: 120px;
+    height: 100px;
   }
   </style>

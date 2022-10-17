@@ -53,6 +53,8 @@ export default {
 }
 </script>
 <style lang="scss">
+// border:1px solid #0b4989;/*主题边框 */
+// cursor:pointer;/*鼠标变小手*/
 *{
   padding: 0;
   margin: 0;
@@ -94,6 +96,7 @@ li{
     display: flex;
     align-items: center;
     li{
+      cursor:pointer;/*鼠标变小手*/
       padding:3px 8px;
       background: #0a1934;
       border-radius: 10px;

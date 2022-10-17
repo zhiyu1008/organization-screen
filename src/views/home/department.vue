@@ -21,39 +21,36 @@
         <p class="desc_line">进一步职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员……</p>
         <div class="title_box">
           <div class="box_title">紧缺专业</div>
-          <div class="title re_title">
+          <div class="title re_title" @click="handleSelectEduType">
             <img src="@/assets/images/icon4.png" alt="">
-            <div class="box_title">经济法学</div>
-            <i class="el-icon-arrow-down"></i>
+            <div class="box_title">{{selectedValue}}</div>
+            <i v-if="!eduStatus" class="el-icon-arrow-down" style="color:#2b4e81"></i>
+            <i v-else class="el-icon-arrow-up" style="color:#2b4e81"></i>
           </div>
         </div>
-        <table>
-          <tr>
-            <th>科室</th>
-            <th>专业名称</th>
-            <th>人才缺口</th>
-          </tr>
-          <tr>
-            <td>侦察科</td>
-            <td>经济法学</td>
-            <td class="value">20</td>
-          </tr>
-          <tr>
-            <td>侦察科</td>
-            <td>经济法学</td>
-            <td class="value">20</td>
-          </tr>
-          <tr>
-            <td>侦察科</td>
-            <td>经济法学</td>
-            <td class="value">20</td>
-          </tr>
-          <tr>
-            <td>侦察科</td>
-            <td>经济法学</td>
-            <td class="value">20</td>
-          </tr>
-        </table>
+        <div class="selectEduBox" v-if="eduStatus">
+          <p v-for="item,index in eduData" @click="handleEduSelected(item,index)">{{item}}</p>
+        </div>
+        <div class="bot">
+              <div class="chart">
+                <div>
+                  <div class="zbox_title">
+                    <p>科室</p>
+                    <p>专业名称</p>
+                    <p>人才缺口</p>
+                  </div>
+                  <div class="animate_box">
+                    <div class="animate">
+                      <div class="zbox" v-for="item in selectObjList">
+                          <p>{{selectObj.name}}</p>
+                          <p>{{selectObj.title}}</p>
+                          <p style="color:#f6c43d">{{selectObj.value}}</p>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+        </div>
       </div>
       <div class="con_box">
         <div class="title">公职人员部门分析数据</div>
@@ -63,50 +60,59 @@
           </div>
         </div>
         <div class="select_box" @click="handleShowEcharts">
-          <div class="select_con_box" @click="handleSelect(0)">
+          <div class="select_con_box" @click="handleSelect1">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData1[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus1"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(1)">
+          <div class="select_con_box" @click="handleSelect2">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData2[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus2"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(2)">
+          <div class="select_con_box" @click="handleSelect3">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData3[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus3"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(3)">
+          <div class="select_con_box" @click="handleSelect4">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData4[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus4"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(4)">
+          <div class="select_con_box" @click="handleSelect5">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData5[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus5"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(5)">
+          <div class="select_con_box" @click="handleSelect6">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData6[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus6"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(6)">
+          <div class="select_con_box" @click="handleSelect7">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData7[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus7"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(7)">
+          <div class="select_con_box" @click="handleSelect8">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData8[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus8"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
-          <div class="select_con_box" @click="handleSelect(8)">
+          <div class="select_con_box" @click="handleSelect9">
             <img src="@/assets/images/icon1.png" alt="">
             <p>{{listData9[0]}}</p>
-            <i class="el-icon-arrow-down"></i>
+            <i class="el-icon-arrow-down" v-if="selectStatus9"></i>
+            <i class="el-icon-arrow-up" v-else></i>
           </div>
           <!-- <div class="select_con_box" v-for="item in list" :key="index">
             <img src="@/assets/images/icon1.png" alt="">
@@ -116,63 +122,63 @@
         </div>
         <div class="con_con_box" v-if="!showEchartsStatsu">
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData1" :style="enterIndex1==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter1(index)" @mouseleave="handleLeave1(index)">
+            <div class="select_item_box" v-if="selectStatus1" v-for="item,index in listData1" :style="enterIndex1==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter1(index)" @mouseleave="handleLeave1(index)">
               <img v-if="enterIndex1==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData2" :style="enterIndex2==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter2(index)" @mouseleave="handleLeave2(index)">
+            <div class="select_item_box" v-if="selectStatus2" v-for="item,index in listData2" :style="enterIndex2==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter2(index)" @mouseleave="handleLeave2(index)">
               <img v-if="enterIndex2==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData3" :style="enterIndex3==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter3(index)" @mouseleave="handleLeave3(index)">
+            <div class="select_item_box" v-if="selectStatus3" v-for="item,index in listData3" :style="enterIndex3==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter3(index)" @mouseleave="handleLeave3(index)">
               <img v-if="enterIndex3==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData4" :style="enterIndex4==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter4(index)" @mouseleave="handleLeave4(index)">
+            <div class="select_item_box" v-if="selectStatus4" v-for="item,index in listData4" :style="enterIndex4==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter4(index)" @mouseleave="handleLeave4(index)">
               <img v-if="enterIndex4==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData5" :style="enterIndex5==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter5(index)" @mouseleave="handleLeave5(index)">
+            <div class="select_item_box" v-if="selectStatus5" v-for="item,index in listData5" :style="enterIndex5==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter5(index)" @mouseleave="handleLeave5(index)">
               <img v-if="enterIndex5==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData6" :style="enterIndex6==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter6(index)" @mouseleave="handleLeave6(index)">
+            <div class="select_item_box" v-if="selectStatus6" v-for="item,index in listData6" :style="enterIndex6==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter6(index)" @mouseleave="handleLeave6(index)">
               <img v-if="enterIndex6==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData7" :style="enterIndex7==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter7(index)" @mouseleave="handleLeave7(index)">
+            <div class="select_item_box" v-if="selectStatus7" v-for="item,index in listData7" :style="enterIndex7==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter7(index)" @mouseleave="handleLeave7(index)">
               <img v-if="enterIndex7==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData8" :style="enterIndex8==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter8(index)" @mouseleave="handleLeave8(index)">
+            <div class="select_item_box" v-if="selectStatus8" v-for="item,index in listData8" :style="enterIndex8==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter8(index)" @mouseleave="handleLeave8(index)">
               <img v-if="enterIndex8==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
             </div>
           </div>
           <div class="select_item_zbox">
-            <div class="select_item_box" v-for="item,index in listData9" :style="enterIndex9==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter9(index)" @mouseleave="handleLeave9(index)">
+            <div class="select_item_box" v-if="selectStatus9" v-for="item,index in listData9" :style="enterIndex9==index?selectStyle:''" @click="handleSelected(item)" @mouseenter="handleEnter9(index)" @mouseleave="handleLeave9(index)">
               <img v-if="enterIndex9==index" src="@/assets/images/icon2.png" alt="">
               <img v-else src="@/assets/images/icon3.png" alt="">
               <p>{{item}}</p>
@@ -293,9 +299,19 @@ export default {
       leaveIndex7:'',
       leaveIndex8:'',
       leaveIndex9:'',
+      selectStatus1:false,
+      selectStatus2:false,
+      selectStatus3:false,
+      selectStatus4:false,
+      selectStatus5:false,
+      selectStatus6:false,
+      selectStatus7:false,
+      selectStatus8:false,
+      selectStatus9:false,
       selectStyle:{
         background: '#404040',
-        color:'#0b72fb'
+        color:'#0b72fb',
+        cursor:'pointer'
       },
       showEchartsStatsu:false,
       pieData1:{
@@ -349,7 +365,7 @@ export default {
         bg:'#1852dc'
       },
       chartData1:{
-        left:'30%',
+        left:'40%',
         barColor:'#1593c1',
         barWidth:15,
         itemName:'紧急专业招录人数',
@@ -361,7 +377,7 @@ export default {
         valueData:[1, 1, 1]
       },
       chartData2:{
-        left:'30%',
+        left:'40%',
         barColor:'#0d81d9',
         barWidth:15,
         itemName:'当前人数',
@@ -372,6 +388,15 @@ export default {
                 ],
         valueData:[1, 3, 8]
       },
+      selectObjList:['1','2','3','4','5'],
+      selectObj:{
+        name:'侦察科',
+        title:'经济法学',
+        value:'20'
+      },
+      selectedValue:'经济法学',
+      eduData:['经济法学','科学','数学','经济学','化学'],
+      eduStatus:false,// 专业下拉菜单
     }
   },
   created () {
@@ -382,12 +407,81 @@ export default {
 
   },
   methods: {
+    handleSelectEduType(){
+      this.eduStatus=!this.eduStatus
+    },
+    handleEduSelected(item,index){
+      console.log(item,index)
+      this.eduStatus=!this.eduStatus
+      this.selectedValue=item
+      switch(index){
+        case 0:
+          this.selectObj={
+            name:'侦察科',
+            title:'经济法学',
+            value:'20'
+          }
+        break;
+        case 1:
+          this.selectObj={
+            name:'保卫科',
+            title:'法学',
+            value:'30'
+          }
+        break;
+        case 2:
+          this.selectObj={
+            name:'医科',
+            title:'经济',
+            value:'20'
+          }
+        break;
+        case 3:
+          this.selectObj={
+            name:'警务科',
+            title:'法学',
+            value:'45'
+          }
+        break;
+        case 4:
+          this.selectObj={
+            name:'守卫科',
+            title:'经济',
+            value:'80'
+          }
+        break;
+      }
+    },
     // 是否显示图表
     handleShowEcharts(){
       this.showEchartsStatsu=false
     },
-    handleSelect(index){
-      console.log(index)
+    handleSelect1(){
+      this.selectStatus1=!this.selectStatus1
+    },
+    handleSelect2(){
+      this.selectStatus2=!this.selectStatus2
+    },
+    handleSelect3(){
+      this.selectStatus3=!this.selectStatus3
+    },
+    handleSelect4(){
+      this.selectStatus4=!this.selectStatus4
+    },
+    handleSelect5(){
+      this.selectStatus5=!this.selectStatus5
+    },
+    handleSelect6(){
+      this.selectStatus6=!this.selectStatus6
+    },
+    handleSelect7(){
+      this.selectStatus7=!this.selectStatus7
+    },
+    handleSelect8(){
+      this.selectStatus8=!this.selectStatus8
+    },
+    handleSelect9(){
+      this.selectStatus9=!this.selectStatus9
     },
     handleEnter1(index){
       this.enterIndex1=index
@@ -454,6 +548,15 @@ export default {
     },
     handleSelected(item){
       console.log(item)
+      this.selectStatus1=false
+      this.selectStatus2=false
+      this.selectStatus3=false
+      this.selectStatus4=false
+      this.selectStatus5=false
+      this.selectStatus6=false
+      this.selectStatus7=false
+      this.selectStatus8=false
+      this.selectStatus9=false
       this.showEchartsStatsu=true
     }
   }
@@ -464,6 +567,7 @@ export default {
 .left_box{
   border:1px solid #0b4989 !important;
   background: #101b2c;
+  width: 265px !important;
 }
 .left_echarts_box{
   border:1px solid #0b4989 !important;
@@ -474,6 +578,26 @@ export default {
   border-radius: 15px;
   box-sizing: border-box;
   padding: 10px 5px;
+  position: relative;
+  .selectEduBox{
+    position: absolute;
+    top: 520px;
+    left: 75px;
+    z-index: 9999;
+    background: #081740;
+    width: 120px;
+    text-align: center;
+    p{
+      font-size: 12px;
+      line-height: 25px;
+      color:#86c9d6;
+    }
+    p:hover{
+      cursor:pointer;
+      background: #404040;
+      color:#256ff9;
+    }
+  }
   .title{
     display:flex;
     align-items: center;
@@ -528,25 +652,49 @@ export default {
     }
   }
   }
-  table{
-    margin-top: 10px;
-    width: 100%;
-    height: 130px;
-    text-align: center;
-    th{
-      padding:3px 5px;
-      background: #142742;
-      font-size: 13px;
-      font-weight: 700;
+  .bot>.chart{
+      margin: 10px 0 0 20px;
+      width: 200px;
+      height: 120px;
+      font-size: 12px;
+      overflow: hidden;
+      position: relative;
+      right: 20px;
+      .zbox_title{
+        display: flex;
+          background: #142742;
+          font-size: 12px !important;
+          p{
+          width: 80px;
+          text-align: center;
+          line-height: 30px;
+        }
+        }
+        .animate_box{
+          overflow:hidden;
+        }
+        .animate{
+          animation: move 6s linear infinite;
+          overflow:auto;
+        }
+        .animate:hover{
+          animation-play-state: paused;
+        }
+        .zbox:hover{
+          background: #162a54;
+          color:#cfc;
+        }
+      .zbox{
+        display: flex;
+        font-size: 12px;
+        p{
+          width: 80px;
+          text-align: center;
+          line-height: 25px;
+        }
+
+      }
     }
-    td{
-      font-size: 13px;
-    }
-    .value{
-      color:#fcc63c;
-      font-weight: 700;
-    }
-  }
 }
 .con_box{
   .select_box{
@@ -607,7 +755,7 @@ export default {
   }
 }
 .con_echarts_box{
-  width: 920px;
+  width: 930px;
   height: 80%;
   position: relative;
   top: 20px;
@@ -690,6 +838,7 @@ export default {
 .right_box{
   border:1px solid #0b4989 !important;
   background: #0a0e17;
+  width: 250px !important;
 }
 .right_echarts_box{
   border:1px solid #0b4989 !important;

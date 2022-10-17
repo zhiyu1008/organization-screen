@@ -1,5 +1,5 @@
 <template>
-  <div class='box' ref="chart">
+  <div class='box' ref="chart" @click="change">
   </div>
 </template>
 
@@ -8,12 +8,19 @@ export default {
   components: {},
   data () {
     return {
+      pieData:this.data
     }
   },
   props:{
     'data':{
       type:Object,
       default:[]
+    }
+  },
+  watch:{
+    data(val){
+      // console.log(val);
+      this.pieData=val
     }
   },
   created () { },
@@ -26,10 +33,10 @@ export default {
       const myChart = this.$echarts.init(chart)
       myChart.setOption({
         title: {
-          text: this.data.title,
+          text: this.pieData.title,
           left: 'center'
         },
-        color:this.data.color,
+        color:this.pieData.color,
         tooltip: {
           trigger: 'item'
         },
@@ -44,7 +51,7 @@ export default {
               length2: 20, // 修改引导线第二段的长度
               },
             },
-            data: this.data.data,
+            data: this.pieData.data,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -55,6 +62,9 @@ export default {
           }
         ]
       })
+    },
+    change(){
+      this.$emit('change',this.pieData)
     }
   }
 }

@@ -19,16 +19,32 @@
           </div>
         </div>
         <ul class="con_con_box" v-if="!echartsStatus">
-          <li v-for="item in listData">
-            <p>{{item}}</p>
-            <p>
-              <span @click="handleRed(item,0)"></span>
-              <span @click="handleYellow(item,1)"></span>
-              <span @click="handleGreen(item,2)"></span>
+          <li @click="handleTap(0)">
+            <p v-if="!lightStatus1">质量指数</p>
+            <p v-else>
+              <span @click="handleRed(0)"></span>
+              <span @click="handleYellow(1)"></span>
+              <span @click="handleGreen(2)"></span>
+            </p>
+          </li>
+          <li @click="handleTap(1)">
+            <p v-if="!lightStatus2">效率指数</p>
+            <p v-else>
+              <span @click="handleRed(0)"></span>
+              <span @click="handleYellow(1)"></span>
+              <span @click="handleGreen(2)"></span>
+            </p>
+          </li>
+          <li @click="handleTap(2)">
+            <p v-if="!lightStatus3">质量指数</p>
+            <p v-else>
+              <span @click="handleRed(0)"></span>
+              <span @click="handleYellow(1)"></span>
+              <span @click="handleGreen(2)"></span>
             </p>
           </li>
         </ul>
-        <div class="con_echarts_box" v-else>
+        <div class="con_echarts_box" v-if="echartsStatus">
           <i class="el-icon-back" style="font-size:30px" @click="handleReturn"></i>
           <echartsCroBar :chartData="chartData1"></echartsCroBar>
         </div>
@@ -50,6 +66,9 @@ export default {
   data () {
     return {
       listData:['质量指数','效率指数','质量指数'],
+      lightStatus1:false,
+      lightStatus2:false,
+      lightStatus3:false,
       echartsStatus:false,
       chartData1:{
         left:'30%',
@@ -76,6 +95,20 @@ export default {
 
   },
   methods: {
+    handleTap(index){
+      console.log(index);
+      switch(index){
+        case 0:
+        this.lightStatus1=!this.lightStatus1
+        break;
+        case 1:
+        this.lightStatus2=!this.lightStatus2
+        break;
+        case 2:
+        this.lightStatus3=!this.lightStatus3
+        break;
+      }
+    },
     handleRed(item,index){
       console.log(item,index)
       this.echartsStatus=true
@@ -131,28 +164,28 @@ export default {
     border-radius: 10px;
     text-align: center;
     box-sizing: border-box;
-    padding-top: 50px;
     p{
+      margin-top: 200px;
       width: 100%;
-      font-size: 25px;
+      font-size: 40px;
       letter-spacing: 10px;
       span{
         animation: d1 2s ease-in-out infinite;
         display: inline-block;
         width: 20px;
         height: 20px;
-        margin:100px 30px;
-        border-radius: 50%
+        margin:0 30px;
+        border-radius: 50%;
       }
-    }
-    p span:first-child{
-      background: red
-    }
-    p span:nth-child(2){
-      background: yellow
-    }
-    p span:nth-child(3){
-      background: greenyellow
+      span:first-child{
+          background: red
+        }
+        span:nth-child(2){
+          background: yellow
+        }
+        span:nth-child(3){
+          background: greenyellow
+        }
     }
   }
 }
