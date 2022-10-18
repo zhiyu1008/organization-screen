@@ -16,9 +16,16 @@
         </div>
         <img class="bg_img" src="@/assets/images/cn.png" alt="">
         <div class="box_title">部门介绍</div>
-        <p class="desc">1.公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员……</p>
+        <div class="desc_box">
+          <p class="desc">1.公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公
+          人员部门分析公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员……</p>
+        </div>
         <div class="box_title">科室职能</div>
-        <p class="desc_line">进一步职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员……</p>
+        <div class="desc_line_box">
+          <p class="desc_line">进一步职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职
+            进一步职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职人员部门分析数据公职
+          人员部门分析数据公职人员门分析数据公职人员部门分析数据公职人员部门部门分析数据数据公职人员部门分析数据公职职人员……</p>
+        </div>
         <div class="title_box">
           <div class="box_title">紧缺专业</div>
           <div class="title re_title" @click="handleSelectEduType">
@@ -54,6 +61,11 @@
       </div>
       <div class="con_box">
         <div class="title">公职人员部门分析数据</div>
+        <div class="search_box" v-if="!showEchartsStatsu">
+        <!-- <div class="search_box"> -->
+            <input type="text" v-model='searchValue' @keydown.enter.trim="handleSearch"/>
+            <p @click="handleSearch">确定</p>
+        </div>
         <div class="nav_svg_box">
           <div class="nav_svg" >
             <dv-decoration-5 style="width:400px;height:40px;" />
@@ -281,6 +293,7 @@ export default {
       listData7:['双协机构','人大机构','政府机构','党委机构','法院','检察院','事业单位','国有企业','街道乡镇'],
       listData8:['国有企业','人大机构','政府机构','双协机构','法院','检察院','事业单位'],
       listData9:['街道乡镇','人大机构','政府机构','双协机构','法院','检察院','事业单位','国有企业','党委机构'],
+      searchValue:'',
       enterIndex1:0,
       enterIndex2:0,
       enterIndex3:0,
@@ -407,6 +420,13 @@ export default {
 
   },
   methods: {
+    handleSearch(){
+      console.log(this.searchValue)
+      if(this.searchValue){
+        this.showEchartsStatsu=true
+        this.searchValue=''
+      }
+    },
     handleSelectEduType(){
       this.eduStatus=!this.eduStatus
     },
@@ -627,15 +647,36 @@ export default {
   .box_title{
     margin: 10px;
   }
-  .desc{
-    text-indent: 2em;
-    font-size: 13px;
+  .desc_box{
+    height: 100px;
+    overflow: hidden;
+    animation-play-state: paused;
+    .desc{
+      text-indent: 2em;
+      font-size: 13px;
+      height: 100px;
+      line-height: 150%;
+      animation: move 5s linear infinite;
+    }
+    .desc:hover{
+      animation-play-state: paused;
+    }
   }
-  .desc_line{
-    text-indent: 2em;
-    font-size: 13px;
-    line-height: 200%;
+  .desc_line_box{
+    height: 120px;
+    overflow: hidden;
+    .desc_line{
+      text-indent: 2em;
+      font-size: 13px;
+      line-height: 150%;
+      height: 120px;
+      animation: move 8s linear infinite;
+    }
+    .desc_line:hover{
+      animation-play-state: paused;
+    }
   }
+
   .title_box{
     margin-top: 10px;
     display: flex;
@@ -674,7 +715,7 @@ export default {
           overflow:hidden;
         }
         .animate{
-          animation: move 6s linear infinite;
+          animation: move 2.5s linear infinite;
           overflow:auto;
         }
         .animate:hover{
@@ -697,13 +738,39 @@ export default {
     }
 }
 .con_box{
+  position:relative;
   .select_box{
     position:relative;
     top: 15px;
     display: flex;
     align-items: center;
   }
-
+  .search_box{
+  z-index:8888;
+  height:35;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 70px;
+  right: 90px;
+  input{
+    width: 130px;
+    height: 25px;
+    margin-right: 5px;
+    background: #031028;
+    border:1px solid #0b4989;
+    border-radius: 5px;
+    padding-left: 10px;
+    color:#fff;
+  }
+  p{
+    width: 50px;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 25px;
+    background: #2168a8;
+  }
+}
   .select_box .select_con_box{
     width: 100px;
     background: #1d3453;

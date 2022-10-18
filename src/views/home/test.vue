@@ -47,6 +47,36 @@
         <div class="con_echarts_box" v-if="echartsStatus">
           <i class="el-icon-back" style="font-size:30px" @click="handleReturn"></i>
           <echartsCroBar :chartData="chartData1"></echartsCroBar>
+          <div class="table">
+            <div class="top">
+              <p>ID</p>
+              <p>专业</p>
+              <p>在职人数</p>
+              <p>招录人数</p>
+              <p>剩余缺口</p>
+              <p>ID</p>
+              <p>专业</p>
+              <p>在职人数</p>
+              <p>招录人数</p>
+              <p>剩余缺口</p>
+            </div>
+            <div class="con">
+              <div class="animate">
+                <div class="con_li" v-for="item in tableList">
+                  <p>{{tableObj.value1}}</p>
+                  <p>{{tableObj.value2}}</p>
+                  <p>{{tableObj.value3}}</p>
+                  <p>{{tableObj.value4}}</p>
+                  <p>{{tableObj.value5}}</p>
+                  <p>{{tableObj.value1}}</p>
+                  <p>{{tableObj.value2}}</p>
+                  <p>{{tableObj.value3}}</p>
+                  <p>{{tableObj.value4}}</p>
+                  <p>{{tableObj.value5}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="right_box" v-if="!echartsStatus"></div>
@@ -85,6 +115,19 @@ export default {
                 ],
         valueData:[11,45,33,24,11,45]
       },
+      tableList:['0','1','2','3','4','5','0','1','2','3','4','5'],
+      tableObj:{
+        value1:'3598',
+        value2:'电气工业',
+        value3:'62',
+        value4:'28',
+        value5:'12',
+        value1:'3598',
+        value2:'电气工业',
+        value3:'62',
+        value4:'28',
+        value5:'12',
+      }
     }
   },
   created () {
@@ -112,12 +155,12 @@ export default {
     handleRed(item,index){
       console.log(item,index)
       this.echartsStatus=true
-      this.chartData1.barColor='red'
+      this.chartData1.barColor='#ff0000'
     },
     handleYellow(item,index){
       console.log(item,index)
       this.echartsStatus=true
-      this.chartData1.barColor='yellow'
+      this.chartData1.barColor='#ffff00'
     },
     handleGreen(item,index){
       console.log(item,index)
@@ -164,6 +207,9 @@ export default {
     border-radius: 10px;
     text-align: center;
     box-sizing: border-box;
+    // overflow: hidden;
+    // transform-style: preserve-3d;
+    // perspective: 1000px;
     p{
       margin-top: 200px;
       width: 100%;
@@ -201,6 +247,49 @@ export default {
   i{
     margin:20px 0 0 50px;
     animation: d1 2s ease-in-out infinite;
+  }
+  .table{
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+    padding:10px 30px 0 10px;
+    overflow: hidden;
+    .top{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      line-height: 40px;
+      text-align: center;
+      background: #162a54;
+      p{
+        width: 100px;
+        font-weight: 700;
+      }
+    }
+    .con{
+      width: 100%;
+      overflow: hidden;
+      .animate{
+        animation: move 6s linear infinite;
+      }
+      .animate:hover{
+        animation-play-state: paused;
+      }
+      .con_li:hover{
+          background: #162a54;
+          color:#cfc;
+        }
+      .con_li{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        line-height: 32px;
+        text-align: center;
+        p{
+        width: 100px;
+      }
+      }
+    }
   }
 }
 .right_box{

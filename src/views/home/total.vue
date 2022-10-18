@@ -489,7 +489,7 @@ export default {
         '科协连续5年未招录行政事业人员'
       ],
       selectedValue:'全日制学历',
-      eduData:['全日制学历','自考学历','其它渠道'],
+      eduData:['全日制学历','最高学位'],
       eduStatus:false,// 学历下拉菜单
     }
   },
@@ -642,25 +642,6 @@ export default {
             {
               name: '大专及以下',
               value: 2927,
-            }
-          ]
-        }
-        break;
-        case 2:
-        this.circleData2={
-        color: ['#021e4b', '#0083eb', '#42e5ff'],
-        datas:[
-            {
-              name: '本科生',
-              value: 3224,
-            },
-            {
-              name: '研究生',
-              value: 1902,
-            },
-            {
-              name: '大专及以下',
-              value: 5927,
             }
           ]
         }
@@ -964,7 +945,7 @@ export default {
         }
         .selectEduBox{
           width: 250px;
-          height: 110px;
+          height: 75px;
           background: #021e4b;
           p{
             width: 250px;
@@ -1023,7 +1004,7 @@ export default {
       position: relative;
       .datalist{
       position: absolute;
-      top: 60px;
+      top: 40px;
       left: 20px;
       display: flex;
       width: 100px;

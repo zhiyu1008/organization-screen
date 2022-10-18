@@ -1,5 +1,5 @@
 <template>
-  <div class='box' ref="chart" @click="change">
+  <div class='box' ref="chart">
   </div>
 </template>
 
@@ -63,9 +63,9 @@ export default {
         ]
       })
     },
-    change(){
-      this.$emit('change',this.pieData)
-    }
+    // change(){
+    //   this.$emit('change',this.pieData)
+    // }
   }
 }
 </script>

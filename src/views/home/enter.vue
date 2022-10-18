@@ -83,7 +83,7 @@
           </div>
           <img src="@/assets/images/right.png" alt="">
           <div class="right">
-            <echarts-pie :data="pieData" @change="change"></echarts-pie>
+            <dv-active-ring-chart :config="config" style="width:150px;height:150px" />
           </div>
         </div>
         <div class="con_con">
@@ -286,32 +286,6 @@ export default {
           }
         ]
       },
-      config:{
-        radius: '80%',
-        activeRadius: '80%',
-        data: [
-          {
-            name: '周口',
-            value: 55
-          },
-          {
-            name: '南阳',
-            value: 120
-          },
-          {
-            name: '西峡',
-            value: 78
-          },
-          {
-            name: '驻马店',
-            value: 66
-          },
-          {
-            name: '新乡',
-            value: 80
-          }
-        ]
-      },
       chartData1:{
         left:'30%',
         barColor:'#008ef1',
@@ -351,6 +325,33 @@ export default {
             { value: 30, name: '30%' },
             { value: 40, name: '40%' }
           ],
+      },
+      config:{
+        color:['#b2efe0','#b3daeb','#7eb1e5','#4d77e0'],
+        lineWidth: 15,
+        radius: '50%',
+        digitalFlopStyle: {
+            fontSize: 14,
+            fill: '#fff'
+          },
+        data: [
+          {
+            name: '录用',
+            value: 55
+          },
+          {
+            name: '调任',
+            value: 120
+          },
+          {
+            name: '军转',
+            value: 78
+          },
+          {
+            name: '公选选举',
+            value: 66
+          }
+        ]
       },
       lineData1:{
         name:'双一流',
@@ -434,55 +435,123 @@ export default {
     this.setRightFirstChart()
   },
   methods: {
-    change(val){
-      console.log('00')
-      console.log(val)
-    },
     // 切换不同职员数据
     handleTap(type){
       switch(type){
         case 1:
-        this.pieData={
-          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+        this.config={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4d77e0'],
+          lineWidth: 15,
+          radius: '50%',
+          digitalFlopStyle: {
+              fontSize: 14,
+              fill: '#fff'
+            },
           data: [
-              { value: 10, name: '10%' },
-              { value: 20, name: '20%' },
-              { value: 30, name: '30%' },
-              { value: 40, name: '40%' }
-            ]
+            {
+              name: '录用',
+              value: 55
+            },
+            {
+              name: '调任',
+              value: 120
+            },
+            {
+              name: '军转',
+              value: 78
+            },
+            {
+              name: '公选选举',
+              value: 66
+            }
+          ]
         }
         break;
         case 2:
-        this.pieData={
-          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+        this.config={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4d77e0'],
+          lineWidth: 15,
+          radius: '50%',
+          digitalFlopStyle: {
+              fontSize: 14,
+              fill: '#fff'
+            },
           data: [
-              { value: 25, name: '25%' },
-              { value: 25, name: '25%' },
-              { value: 25, name: '25%' },
-              { value: 25, name: '25%' }
-            ]
+            {
+              name: '录用',
+              value: 74
+            },
+            {
+              name: '调任',
+              value: 86
+            },
+            {
+              name: '军转',
+              value: 45
+            },
+            {
+              name: '公选选举',
+              value: 140
+            }
+          ]
         }
         break;
         case 3:
-        this.pieData={
-          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+        this.config={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4d77e0'],
+          lineWidth: 15,
+          radius: '50%',
+          digitalFlopStyle: {
+              fontSize: 14,
+              fill: '#fff'
+            },
           data: [
-              { value: 10, name: '10%' },
-              { value: 30, name: '30%' },
-              { value: 25, name: '25%' },
-              { value: 35, name: '35%' }
-            ],
+            {
+              name: '录用',
+              value: 17
+            },
+            {
+              name: '调任',
+              value: 120
+            },
+            {
+              name: '军转',
+              value:55
+            },
+            {
+              name: '公选选举',
+              value: 66
+            }
+          ]
         }
         break;
         case 4:
-        this.pieData={
-          color:['#b2efe0','#b3daeb','#7eb1e5','#4e77e0'],
+        this.config={
+          color:['#b2efe0','#b3daeb','#7eb1e5','#4d77e0'],
+          lineWidth: 15,
+          radius: '50%',
+          digitalFlopStyle: {
+              fontSize: 14,
+              fill: '#fff'
+            },
           data: [
-              { value: 26, name: '26%' },
-              { value: 19, name: '19%' },
-              { value: 24, name: '24%' },
-              { value: 31, name: '31%' }
-            ],
+            {
+              name: '录用',
+              value: 75
+            },
+            {
+              name: '调任',
+              value: 17
+            },
+            {
+              name: '军转',
+              value: 102
+            },
+            {
+              name: '公选选举',
+              value: 66
+            }
+          ]
         }
         break;
       }
@@ -658,7 +727,42 @@ export default {
           }
           ]
       })
-    }
+    },
+    handleSetPieEchart(){
+      const chart = this.$refs.pieChart
+      const myChart = this.$echarts.init(chart)
+      myChart.setOption({
+        title: {
+          text: this.pieData.title,
+          left: 'center'
+        },
+        color:this.pieData.color,
+        tooltip: {
+          trigger: 'item'
+        },
+        series: [
+          {
+            type: 'pie',
+            radius: '65%',
+            center: ["50%", "40%"],// 调整图表位置
+            labelLine:{
+            normal:{
+              length: 5, // 修改引导线第一段的长度
+              length2: 20, // 修改引导线第二段的长度
+              },
+            },
+            data: this.pieData.data,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      })
+    },
   }
 }
 </script>
@@ -779,6 +883,12 @@ export default {
     .right{
       width: 200px;
       height: 100px;
+      position: relative;
+      bottom: 25px;
+      // .pieChart{
+      //   width: 200px;
+      //   height: 100px;
+      // }
     }
   }
   .con_con{

@@ -5,7 +5,7 @@
         <ul class="tabs">
           <li v-for="item,index in tabsList" :class="selectId==index?'select':''" :key="index" @click="handleTap(index)">{{item}}</li>
         </ul>
-        <el-tooltip class="item" effect="dark" content="页面待建设" placement="right">
+        <el-tooltip class="item" effect="dark" content="页面待建设" placement="top">
           <p class="inner"></p>
         </el-tooltip>
       </div>
@@ -19,7 +19,8 @@ export default {
   data () {
     return {
       selectId:0,
-      tabsList:['总体概述','入口情况','部门分析','考核评价','个性模块']
+      tabsList:['总体概述','入口情况','部门分析','考核评价','个性模块'],
+
     }
   },
   created () {
@@ -55,6 +56,10 @@ export default {
 <style lang="scss">
 // border:1px solid #0b4989;/*主题边框 */
 // cursor:pointer;/*鼠标变小手*/
+
+// animation: d1 2s ease-in-out infinite;/*开启缩放动画 */
+// animation: move 6s linear infinite;/*开启平移动画 */
+// animation-play-state: paused;/*停止平移动画 */
 *{
   padding: 0;
   margin: 0;
@@ -114,5 +119,6 @@ li{
   width: 80px;
   height: 30px;
 }
-  // animation: d1 2s ease-in-out infinite;
+
+
 </style>
