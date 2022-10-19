@@ -1,10 +1,12 @@
 <template>
   <div class="container">
+    <navTabs :selectId="selectId"></navTabs>
     <div class="title_box">
       <img src="@/assets/images/title_icon.png" alt="" />
       <div class="left_title">提高公职人员入口质量关应用场景</div>
       <div class="en_desc">Federation of trade union member data monitoring screen</div>
     </div>
+    <div class="right_title">{{time}}</div>
     <div class="box">
       <div class="left_box">
         <div class="first_floor">
@@ -170,16 +172,18 @@
 </template>
 
 <script>
+import navTabs from '@/components/navTabs.vue'
 import echartsBest from '@/components/echartsBest.vue'
 import echartsCircle from '@/components/echartsCircle.vue'
 import echartsLine from '@/components/echartsLine.vue'
 import echartsBar from '@/components/echartsBar.vue'
 import echartsCroBar from '@/components/echartsCroBar.vue'
 export default {
-  components: {echartsBest,echartsCircle,echartsBar,echartsCroBar,echartsLine},
+  components: {navTabs,echartsBest,echartsCircle,echartsBar,echartsCroBar,echartsLine},
   data () {
     return {
       time:'',
+      selectId:0,
       config1:{
         radius: '45%',
         activeRadius: '55%',

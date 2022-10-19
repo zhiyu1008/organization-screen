@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <navTabs :selectId="selectId"></navTabs>
     <div class="title_box">
       <img src="@/assets/images/title_icon.png" alt="" />
       <div class="left_title">公职人员入口质量关应用场景</div>
@@ -9,9 +10,9 @@
     <div class="box">
       <div class="left_box" v-if="!showEchartsStatsu"></div>
       <div class="left_echarts_box" v-else>
-        <div class="title">
+        <div class="title" @click="handleChange">
           <img src="@/assets/images/icon4.png" alt="">
-          <div class="box_title">审计局</div>
+          <div class="box_title">{{titleName}}</div>
           <i class="el-icon-arrow-down"></i>
         </div>
         <img class="bg_img" src="@/assets/images/cn.png" alt="">
@@ -62,7 +63,6 @@
       <div class="con_box">
         <div class="title">公职人员部门分析数据</div>
         <div class="search_box" v-if="!showEchartsStatsu">
-        <!-- <div class="search_box"> -->
             <input type="text" v-model='searchValue' @keydown.enter.trim="handleSearch"/>
             <p @click="handleSearch">确定</p>
         </div>
@@ -275,14 +275,18 @@
 </template>
 
 <script>
+import navTabs from '@/components/navTabs.vue'
 import echartsPie from '@/components/echartsPie.vue'
 import echartsLine from '@/components/echartsLine.vue'
 import echartsCroBar from '@/components/echartsCroBar.vue'
 export default {
-  components: {echartsPie,echartsLine,echartsCroBar},
+  components: {navTabs,echartsPie,echartsLine,echartsCroBar},
   data () {
     return {
       time:'',
+      selectId:2,
+      titleName:'',
+      selectIndex:'',
       // list:[listData1[0], listData2[0], listData3[0],listData4[0], listData5[0], listData6[0],listData7[0], listData8[0], listData9[0]],
       listData1:['党委机构','人大机构','政府机构','双协机构','法院','检察院','事业单位','国有企业','街道乡镇'],
       listData2:['人大机构','党委机构','政府机构'],
@@ -416,20 +420,55 @@ export default {
     // 获取当前时间
     this.handleTime();
   },
-  mounted () {
-
-  },
+  mounted () {},
   methods: {
+    // 切换部门
+    handleChange(){
+      this.showEchartsStatsu=false
+      switch(this.selectIndex){
+        case 1:
+          this.selectStatus1=true
+        break;
+        case 2:
+          this.selectStatus2=true
+        break;
+        case 3:
+          this.selectStatus3=true
+        break;
+        case 4:
+          this.selectStatus4=true
+        break;
+        case 5:
+          this.selectStatus5=true
+        break;
+        case 6:
+          this.selectStatus6=true
+        break;
+        case 7:
+          this.selectStatus7=true
+        break;
+        case 8:
+          this.selectStatus8=true
+        break;
+        case 9:
+          this.selectStatus9=true
+        break;
+      }
+    },
+    // 搜索对应的部门单位
     handleSearch(){
       console.log(this.searchValue)
       if(this.searchValue){
         this.showEchartsStatsu=true
+        this.titleName=this.searchValue
         this.searchValue=''
       }
     },
+    // 专业下拉功能
     handleSelectEduType(){
       this.eduStatus=!this.eduStatus
     },
+    // 切换专业功能
     handleEduSelected(item,index){
       console.log(item,index)
       this.eduStatus=!this.eduStatus
@@ -472,37 +511,62 @@ export default {
         break;
       }
     },
+    //部门选中事件
+    handleSelected(item){
+      console.log(item)
+      this.titleName=item
+      this.selectStatus1=false
+      this.selectStatus2=false
+      this.selectStatus3=false
+      this.selectStatus4=false
+      this.selectStatus5=false
+      this.selectStatus6=false
+      this.selectStatus7=false
+      this.selectStatus8=false
+      this.selectStatus9=false
+      this.showEchartsStatsu=true
+    },
     // 是否显示图表
     handleShowEcharts(){
       this.showEchartsStatsu=false
     },
     handleSelect1(){
       this.selectStatus1=!this.selectStatus1
+      this.selectIndex=1
     },
     handleSelect2(){
       this.selectStatus2=!this.selectStatus2
+      this.selectIndex=2
     },
     handleSelect3(){
       this.selectStatus3=!this.selectStatus3
+      this.selectIndex=3
     },
     handleSelect4(){
       this.selectStatus4=!this.selectStatus4
+      this.selectIndex=4
     },
     handleSelect5(){
       this.selectStatus5=!this.selectStatus5
+      this.selectIndex=5
     },
     handleSelect6(){
       this.selectStatus6=!this.selectStatus6
+      this.selectIndex=6
     },
     handleSelect7(){
       this.selectStatus7=!this.selectStatus7
+      this.selectIndex=7
     },
     handleSelect8(){
       this.selectStatus8=!this.selectStatus8
+      this.selectIndex=8
     },
     handleSelect9(){
       this.selectStatus9=!this.selectStatus9
+      this.selectIndex=9
     },
+    // 鼠标进入事件
     handleEnter1(index){
       this.enterIndex1=index
     },
@@ -530,6 +594,7 @@ export default {
     handleEnter9(index){
       this.enterIndex9=index
     },
+    // 鼠标移出事件
     handleLeave1(index){
       this.leaveIndex1=index
       this.enterIndex1=0
@@ -565,19 +630,6 @@ export default {
     handleLeave9(index){
       this.leaveIndex9=index
       this.enterIndex9=0
-    },
-    handleSelected(item){
-      console.log(item)
-      this.selectStatus1=false
-      this.selectStatus2=false
-      this.selectStatus3=false
-      this.selectStatus4=false
-      this.selectStatus5=false
-      this.selectStatus6=false
-      this.selectStatus7=false
-      this.selectStatus8=false
-      this.selectStatus9=false
-      this.showEchartsStatsu=true
     }
   }
 }
@@ -752,7 +804,7 @@ export default {
   align-items: center;
   position: absolute;
   top: 70px;
-  right: 90px;
+  right: 10px;
   input{
     width: 130px;
     height: 25px;

@@ -1,55 +1,66 @@
 <template>
   <dv-full-screen-container>
     <div class="dv_box">
-      <div class="tabs_box" v-if="$route.path!='/'">
+      <!-- <div class="tabs_box" v-if="$route.path!='/'">
         <ul class="tabs">
           <li v-for="item,index in tabsList" :class="selectId==index?'select':''" :key="index" @click="handleTap(index)">{{item}}</li>
         </ul>
-        <el-tooltip class="item" effect="dark" content="页面待建设" placement="top">
+        <el-tooltip class="item" effect="dark" content="页面待建设" placement="right-start">
           <p class="inner"></p>
         </el-tooltip>
-      </div>
+      </div> -->
       <router-view/>
     </div>
   </dv-full-screen-container>
 </template>
 <script>
+import indexApi from '@/api/index'
 export default {
   components: {},
   data () {
     return {
-      selectId:0,
-      tabsList:['总体概述','入口情况','部门分析','考核评价','个性模块'],
-
+      // selectId:0,
+      // tabsList:['总体概述','入口情况','部门分析','考核评价','个性模块'],
     }
   },
   created () {
+    this.getList()
   },
-  mounted () { },
+  mounted () {
+    // 关闭浏览器窗口的时候清空浏览器缓存在localStorage的数据
+    // window.onbeforeunload = function (e) {
+    //   const storage = window.localStorage
+    //   storage.clear()
+    // }
+  },
   methods: {
+    async getList(){
+      const res=await indexApi.getIndexList()
+      console.log(res)
+    },
     // 点击跳转对应页面
-    handleTap(index){
-      if(index!=4){
-        this.selectId=index
-      }
-      switch(index){
-        case 0:
-          this.$router.push('/home/total')
-          break;
-        case 1:
-          this.$router.push('/home/enter')
-          break;
-        case 2:
-          this.$router.push('/home/department')
-          break;
-        case 3:
-          this.$router.push('/home/test')
-          break;
-        case 4:
-          alert("等待构建")
-          break;
-      }
-    }
+    // handleTap(index){
+    //   if(index!=4){
+    //     this.selectId=index
+    //   }
+    //   switch(index){
+    //     case 0:
+    //       this.$router.push('/home/total')
+    //       break;
+    //     case 1:
+    //       this.$router.push('/home/enter')
+    //       break;
+    //     case 2:
+    //       this.$router.push('/home/department')
+    //       break;
+    //     case 3:
+    //       this.$router.push('/home/test')
+    //       break;
+    //     case 4:
+    //       alert("等待构建")
+    //       break;
+    //   }
+    // }
   }
 }
 </script>
@@ -104,6 +115,7 @@ li{
       cursor:pointer;/*鼠标变小手*/
       padding:3px 8px;
       background: #0a1934;
+      border:1px solid #0b4989;
       border-radius: 10px;
       margin-right: 5px;
       color: #ccc;

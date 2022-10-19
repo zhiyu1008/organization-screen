@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <navTabs :selectId="selectId"></navTabs>
     <div class="title_box">
       <img src="@/assets/images/title_icon.png" alt="" />
       <div class="left_title">提高公职人员入口质量关应用场景</div>
@@ -36,7 +37,7 @@
             </p>
           </li>
           <li @click="handleTap(2)">
-            <p v-if="!lightStatus3">质量指数</p>
+            <p v-if="!lightStatus3">公平指数</p>
             <p v-else>
               <span @click="handleRed(0)"></span>
               <span @click="handleYellow(1)"></span>
@@ -88,14 +89,17 @@
 </template>
 
 <script>
+import navTabs from '@/components/navTabs.vue'
 import echartsCroBar from '@/components/echartsCroBar.vue'
 export default {
   components: {
+    navTabs,
     echartsCroBar
   },
   data () {
     return {
-      listData:['质量指数','效率指数','质量指数'],
+      selectId:3,
+      listData:['质量指数','效率指数','公平指数'],
       lightStatus1:false,
       lightStatus2:false,
       lightStatus3:false,

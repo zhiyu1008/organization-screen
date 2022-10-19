@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <navTabs :selectId="selectId"></navTabs>
     <div class="title_box">
       <img src="@/assets/images/title_icon.png" alt="" />
       <div class="left_title">提高公职人员入口质量关应用场景</div>
@@ -214,6 +215,7 @@
 </template>
 
 <script>
+import navTabs from '@/components/navTabs.vue'
 import echartsBest from '@/components/echartsBest.vue'
 import echartsCroBar from '@/components/echartsCroBar.vue'
 import echartsPie from '@/components/echartsPie.vue'
@@ -221,9 +223,10 @@ import echartsLine from '@/components/echartsLine.vue'
 import echartsCircle from '@/components/echartsCircle.vue'
 import echartsBar from '@/components/echartsBar.vue'
 export default {
-  components: {echartsBest,echartsCroBar,echartsPie,echartsLine,echartsCircle,echartsBar},
+  components: {navTabs,echartsBest,echartsCroBar,echartsPie,echartsLine,echartsCircle,echartsBar},
   data () {
     return {
+      selectId:1,
       bestData1:{
         color:['#1ff2e6', '#1ba5da'],
         value:[ '女性', '男性' ],

@@ -10,6 +10,7 @@ export default {
   components: {},
   data () {
     return {
+
     }
   },
   created () {
@@ -42,6 +43,6 @@ export default {
     top: 150px;
     right: 450px;
   }
-  
+
 }
 </style>
